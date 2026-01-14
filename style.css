@@ -784,6 +784,7 @@ html {
    transform: none; 
    /* margin-right: 120px;  */
    margin: 0 auto;
+   animation: heroZoomIn 0.8s ease-out forwards;
 }
 
 
@@ -832,7 +833,7 @@ html {
   position: relative;
   transform: rotate(2deg);
   z-index: 2;
-  animation: heroZoomIn 0.5s ease-out forwards;
+  animation: heroZoomIn 0.8s ease-out forwards;
 
   /* top: 56px; 
   transform: rotate(2deg) translateY(16px) translateX(-200px);  */
@@ -943,76 +944,6 @@ html {
   color: #ffffff;
 }
 
-/* Responsive Adjustments */
-/* @media (max-width: 968px) {
-  .hero-container {
-    flex-direction: column;
-    text-align: center;
-    padding-top: 40px;
-  }
-
-  .hero-content {
-    max-width: 100%;
-    
-  }
-
-  .hero-desc {
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .hero-actions {
-    justify-content: center;
-  }
-/* 
-  .hero-visual {
-    width: 100%;
-    justify-content: center;
-    margin-top: 40px;
-  } */
-  /* .hero-visual {
-  flex: 1;
-  display: flex;
-  justify-content: flex-end; 
-  align-items: center;     
-  position: relative;
-  padding-right: 20px;
-} */
-
-  /* Adjust floating cards on mobile to not go off screen */
-  /* .score-card {
-    right: 0;
-    top: 20px;
-  }
-  .status-card {
-    left: 0;
-    bottom: 20px;
-  }
-} */ 
-/* 
-@media (max-width: 480px) {
-  .hero-title {
-    font-size: 42px;
-  }
-  
-  .glass-card {
-    min-width: auto;
-    padding: 10px 14px;
-  }
-} */
-
-/* Mobile Responsiveness */
-/* @media (max-width: 900px) {
-  .footer-container {
-    grid-template-columns: 1fr; 
-    gap: 40px;
-  }
-  
-  .cta-card h2 {
-    font-size: 24px;
-  }
-} */
-/* Ensures the section titles are visible when clicked */
 .services-section, 
 .about-section, 
 #contact-footer { 
@@ -1101,78 +1032,50 @@ html {
 
 /* ================= MEDIA QUERIES (RESPONSIVENESS) ================= */
 
-/* Tablet & Smaller Laptops (Max 968px) */
+
+/* Fix 1: Remove any potential bullets/dots from navbar button */
+.nav .cibil-btn {
+  list-style: none !important;
+  display: inline-block;
+  outline: none;
+}
+
+/* Tablet & Mobile (Max 968px) */
 @media (max-width: 968px) {
+  /* Fix 2: Hero Section - Text Only */
+  .hero-visual, 
+  .hero-glow, 
+  .hero-section::before,
+  .visual-wrapper {
+    display: none !important; /* Disables all background images/visuals */
+  }
+
+ .hero-section {
+    /* Ensure the image shows and scales correctly on phone screens */
+    background: url('image.avif') no-repeat center center; 
+    background-size: cover; 
+    
+    /* Darken the mobile background more so white text is readable */
+    box-shadow: inset 0 0 0 1000px rgba(8, 27, 48, 0.85);
+    
+  
+    min-height: auto; 
+    height: auto;
+    
+    /* Add generous padding so content doesn't touch edges or the next section */
+    padding-top: 140px;
+    padding-bottom: 270px; 
+  }
+
+  /* Ensure the container stacks vertically without overlapping */
   .hero-container {
     flex-direction: column;
-    text-align: center;
-    padding-top: 40px;
+    height: auto;
   }
 
   .hero-content {
     max-width: 100%;
-    margin-bottom: 50px;
-  }
-  
-  .hero-desc {
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .hero-actions {
-    justify-content: center;
-  }
-
-  .hero-visual {
-    width: 100%;
-    justify-content: center;
-    padding-right: 0;
-  }
-
-  .about-cards {
-    grid-template-columns: repeat(2, 1fr); /* 2 columns for tablets */
-  }
-}
-
-/* Mobile & Small Tablet (Max 768px) */
-@media (max-width: 768px) {
-  .header {
-    padding: 16px 24px;
-  }
-
-  /* Hamburger Toggle Visible */
-  .menu-toggle {
-    display: flex;
-  }
-
-  /* Navigation Drawer */
-  .nav {
-    position: fixed;
-    top: 70px; /* Below header */
-    left: 0;
-    width: 100%;
-    background-color: #0b2540; /* Dark blue background */
-    flex-direction: column;
-    padding: 30px;
-    gap: 30px;
-    transform: translateY(-150%); /* Hidden by default */
-    transition: transform 0.4s ease;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-  }
-
-  /* When Active, slide down */
-  .nav.active {
-    transform: translateY(0);
-  }
-
-  .nav a {
-    color: #ffffff !important; /* Force white text */
-    font-size: 18px;
-  }
-
-  /* Hero Section Mobile */
-  .hero-section {
-    padding: 100px 24px 60px;
+    animation: none; /* Disable slide animation for better mobile performance */
   }
 
   .hero-title {
@@ -1181,82 +1084,106 @@ html {
 
   .hero-desc {
     font-size: 18px;
+    margin: 0 auto 30px;
   }
 
-  .visual-wrapper {
+  .hero-actions {
+    justify-content: center;
+  }
+}
+
+/* Mobile & Small Tablet (Max 768px) */
+@media (max-width: 768px) {
+  
+  .menu-toggle {
+    display: flex; /* Makes hamburger visible */
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    z-index: 1001;
+  }
+
+  .menu-toggle span {
+    width: 25px;
+    height: 3px;
+    background: #ffffff;
+    transition: 0.3s;
+  }
+
+  /* When header scrolls, change hamburger to dark */
+  .header.scrolled .menu-toggle span {
+    background: #0b2540;
+  }
+
+  .nav {
+    position: fixed;
+    top: 0;
+    right: -100%; /* Hidden off-screen to the right */
+    width: 280px;
+    height: 100vh;
+    background-color: #0b2540; 
+    flex-direction: column;
+    justify-content: center;
+    padding: 40px;
+    gap: 30px;
+    transition: right 0.4s ease;
+    box-shadow: -10px 0 20px rgba(0,0,0,0.2);
+  }
+
+  .nav.active {
+    right: 0; /* Slides in */
+  }
+
+  .nav a {
+    color: #ffffff !important;
+    font-size: 18px;
     width: 100%;
-    height: auto;
-    aspect-ratio: 1/1;
-    max-width: 320px;
+    text-align: center;
   }
 
-  .visual-wrapper::before,
-  .visual-wrapper::after {
-    width: 100%; height: 100%;
+  .nav .cibil-btn {
+    display: none !important;
   }
 
-  .glass-card {
-    padding: 8px 12px;
-    min-width: auto;
+ .pricing-grid {
+    flex-direction: column;
+    align-items: center; /* This centers the cards */
   }
-  .card-value {
-    font-size: 14px;
-  }
-  .icon-circle {
-    width: 32px; height: 32px;
-  }
-  .glass-card svg {
-    width: 16px; height: 16px;
+
+  .pricing-card {
+    width: 100%;
+    /* This prevents the card from looking "too stretched" */
+    max-width: 340px; 
+    margin-bottom: 20px;
   }
   
-  /* Positioning floating cards tighter to image */
-  .score-card { transform: translate(10%, -20%) scale(0.9); }
-  .status-card { transform: translate(-10%, 20%) scale(0.9); }
-
-  /* About Section Mobile */
-  .about-container {
-    padding: 40px 24px;
-  }
+  /* OPTIONAL: Fix for About Cards to match the look */
   .about-cards {
-    grid-template-columns: 1fr; /* Stack vertically */
-    gap: 24px;
-  }
-  .about-card {
-    padding: 24px;
-  }
-  .about-title {
-    font-size: 32px;
-  }
-
-  /* Services Mobile */
-  .services-section {
-    padding: 60px 20px;
-  }
-  .pricing-grid {
+    display: flex;
     flex-direction: column;
     align-items: center;
   }
-  .pricing-card {
-    max-width: 100%;
-  }
-
-  /* Footer Mobile */
-  .footer-container {
-    padding: 60px 24px;
-    flex-direction: column;
-    gap: 40px;
-  }
-  .footer-col {
+  
+  .about-card {
     width: 100%;
-  }
-  
-  /* Floating buttons */
-  .whatsapp-float {
-    width: 56px; height: 56px; right: 20px; bottom: 20px;
-  }
-  .whatsapp-float img { width: 32px; height: 32px; }
-  
-  .help-toolkit {
-    right: 20px; bottom: 90px; width: calc(100% - 40px);
+    max-width: 340px;
   }
 }
+
+  /* Alignment & Scrolling */
+  body {
+    overflow-x: hidden; /* Prevents horizontal scroll */
+  }
+  
+  .whatsapp-float {
+    width: 56px; 
+    height: 56px; 
+    right: 20px; 
+    bottom: 20px;
+  }
+
+  .help-toolkit {
+    right: 20px; 
+    bottom: 85px; 
+    width: calc( - 40px);
+  }
