@@ -1188,32 +1188,3 @@ html {
     width: calc( - 40px);
   }
 
-/* ================= PAYMENT NOTICE MARQUEE ================= */
-.payment-marquee {
-  width: 100%;
-  overflow: hidden;
-  background: #081b30;          
-  border-top: 1px solid rgba(255,255,255,0.1);
-  border-bottom: 1px solid rgba(255,255,255,0.1);
-  padding: 10px 0;
-}
-
-.marquee-track {
-  display: inline-block;
-  white-space: nowrap;
-  padding-left: 100%;
-  font-size: 14px;
-  font-weight: 600;
-  color: #c9a45c;               
-  animation: marqueeScroll 22s linear infinite;
-}
-
-/* Right → Left animation */
-@keyframes marqueeScroll {
-  from {
-    transform: translateX(0%);
-  }
-  to {
-    transform: translateX(-100%);
-  }
-}
