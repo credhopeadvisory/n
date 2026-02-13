@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
     e.preventDefault();
 
     window.open(
-      "https://wa.me/919108601385?text=" +
+      "https://wa.me/9187458093?text=" +
         encodeURIComponent(target.dataset.wa),
       "_blank"
     );
@@ -68,4 +68,5 @@ window.addEventListener("load", () => {
     );
     window.open(`https://wa.me/919108601385?text=${msg}`, "_blank");
   });
+
 });
