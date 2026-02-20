@@ -1029,6 +1029,35 @@ html {
   color: #6b7c8f;
 }
 
+.payment-marquee {
+  width: 100%;
+  overflow: hidden;
+  background: #081b30;          /* Matches footer tone */
+  border-top: 1px solid rgba(255,255,255,0.1);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  padding: 10px 0;
+}
+
+.marquee-track {
+  display: inline-block;
+  white-space: nowrap;
+  padding-left: 100%;
+  font-size: 20px;
+  font-weight: 600;
+  color: #c9a45c;               /* Brand gold */
+  animation: marqueeScroll 30s linear infinite;
+}
+
+/* Right → Left animation */
+@keyframes marqueeScroll {
+  from {
+    transform: translateX(0%);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
 /* ================= MEDIA QUERIES (RESPONSIVENESS) ================= */
 
 
@@ -1187,33 +1216,7 @@ html {
     width: calc( - 40px);
   }
 
-.payment-marquee {
-  width: 100%;
-  overflow: hidden;
-  background: #081b30;          /* Matches footer tone */
-  border-top: 1px solid rgba(255,255,255,0.1);
-  border-bottom: 1px solid rgba(255,255,255,0.1);
-  padding: 10px 0;
-}
 
-.marquee-track {
-  display: inline-block;
-  white-space: nowrap;
-  padding-left: 100%;
-  font-size: 20px;
-  font-weight: 600;
-  color: #c9a45c;               /* Brand gold */
-  animation: marqueeScroll 30s linear infinite;
-}
 
-/* Right → Left animation */
-@keyframes marqueeScroll {
-  from {
-    transform: translateX(0%);
-  }
-  to {
-    transform: translateX(-100%);
-  }
-}
 
 
